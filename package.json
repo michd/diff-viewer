@@ -1,0 +1,21 @@
+{
+  "name": "diff",
+  "version": "1.0.0",
+  "description": "A little tool to convert diff files into webpages where can link to specific lines",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "git",
+    "diff"
+  ],
+  "author": "Michael Duerinckx",
+  "license": "WTFPL",
+  "dependencies": {
+    "formidable": "^1.0.17",
+    "node-static": "^0.7.7",
+    "url": "^0.11.0",
+    "util": "^0.10.3"
+  }
+}

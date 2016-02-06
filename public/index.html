@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Diff Viewer</title>
+  <link rel="stylesheet" type="text/css" href="/assets/css/common.css">
+</head>
+<body>
+  <header><h1>Handy Dandy Diff Viewer</h1></header>
+  <main>
+    <form action="/new" method="post" enctype="multipart/form-data">
+      <fieldset>
+        <legend>New diff</legend>
+        <label>
+          Title
+          <input type=text name="title" maxlength="120" placeholder="My big fancy feature">
+        </label>
+        <label>
+          Description
+          <textarea name="description" placeholder="Maybe simply a link to the GitHub pull request"></textarea>
+        </label>
+        <label>
+          Diff file
+          <input type="file" name="diff_file">
+        </label>
+        <button type="submit">Post</button>
+      </fieldset>
+    </form>
+  </main>
+  <footer>
+    Written by
+    <a href="http://michd.me" target="_blank">Micha&euml;l "Mich" Duerinckx</a>,
+    because GitHub's diff view didn't cut it for some of our occasional
+    monstrous diffs.
+  </footer>
+</body>
+</html>
