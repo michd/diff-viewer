@@ -13,11 +13,19 @@
         <legend>New diff</legend>
         <label>
           Title
-          <input type=text name="title" maxlength="120" placeholder="My big fancy feature">
+          <input type="text" name="title" maxlength="120" placeholder="My big fancy feature">
         </label>
         <label>
           Description
           <textarea name="description" placeholder="Maybe simply a link to the GitHub pull request"></textarea>
+        </label>
+        <label>
+          Repository Github URL
+          <input type="text" name="repoUrl" placeholder="https://github.com/user/repository">
+        </label>
+        <label>
+          Commit or branch name for this diff (for blob/tree URLS)
+          <input type="text" name="headName" placeholder="some-branch-name">
         </label>
         <label>
           Diff file

@@ -22,7 +22,9 @@ function handleUpload(request, response) {
       file = files["diff_file"];
       metadata = {
           title: fields["title"],
-          description: fields["description"]
+          description: fields["description"],
+          repoUrl: fields["repoUrl"],
+          headName: fields["headName"]
         };
     });
 
