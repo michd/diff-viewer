@@ -10,7 +10,8 @@ var ROUTES = [
     },
 
     {
-      "pattern": new RegExp("^/diff/([a-zA-Z0-9\-\_\.]+\.(diff|html))$"),
+      "pattern": new RegExp("^/diff/([a-zA-Z0-9\-\_\.\/]+\.(diff|html))$"),
+
       "handler": handleDiffRequest
     },
 
@@ -25,16 +26,15 @@ var ROUTES = [
 
 var nodeStatic = require("node-static"),
     http = require("http"),
+    fs = require("fs"),
     url = require("url"),
     multipart = require("multipart"),
     ingest = require("./ingest");
 
 var staticFileServer,
-    diffStaticFileServer,
     httpServer;
 
 staticFileServer = new nodeStatic.Server("./public", { cache: 300 });
-diffStaticFileServer = new nodeStatic.Server("./content", { cache: 3600 * 24 });
 
 httpServer = http.createServer(httpServerOnRequest).listen(PORT);
 
@@ -64,17 +64,29 @@ function handleHomeRequest(request, response) {
 }
 
 function handleUploadRequest(request, response) {
-  ingest.handleUpload(request, response, "./content/");
+  ingest.handleUpload(request, response, "./content/diff/");
 }
 
 function handleDiffRequest(request, response, matches) {
-  // TODO see if I need to add a content-type, and how
+  var filePath = "content" + url.parse(request.url).pathname,
+      type = matches[2] === "diff" ? "text/plain" : "text/html",
+      readStream;
 
-  request.addListener("end", function () {
-      diffStaticFileServer.serve(request, response, function (e, res) {
-          if (e && e.status === 404)  return handle404(request, response);
-        });
-    }).resume();
+  function fileExists(path) {
+    try {
+      fs.accessSync(path, fs.R_OK);
+      return true;
+    } catch (ex) {
+      return false;
+    }
+  }
+
+  if (!fileExists(filePath)) return handle404(request, response);
+
+  response.writeHead(200, { "Content-Type": type });
+
+  readStream = fs.createReadStream(filePath);
+  readStream.pipe(response);
 }
 
 function handleAssetRequest(request, response, matches) {

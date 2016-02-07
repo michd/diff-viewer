@@ -12,12 +12,22 @@ header {
   background: #080808;
 }
 
-header h1 {
+header h1,
+header h2 {
   text-align: center;
   margin: 0;
-  color: #EEE;
   font-weight: normal;
+}
+
+header h1 {
+  color: #EEE;
   font-size: 150%;
+}
+
+header h2 {
+  color: #CCC;
+  font-size: 125%;
+  margin-top: 0.5em;
 }
 
 
