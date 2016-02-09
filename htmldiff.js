@@ -56,19 +56,15 @@ Line.prototype.getId = function () {
     return this.filename + ":L" + lineStr;
   };
 
-Line.prototype.getLinkedLineNo = function (lineNo) {
-    return "<a href=\"#" + this.getId() + "\">" + (lineNo || "  ") + "</a>";
-  };
-
 Line.prototype.toString = function () {
     var posLine = this.isPositionLine();
 
     return "<tr id=\"" + this.getId() + "\" " +
               "class=\"" + this.getClasses() + "\">" +
            "<td class=\"lineno\">" +
-             (posLine ? "..." : this.getLinkedLineNo(this.oldLineNumber)) +
+             (posLine ? "..." : (this.oldLineNumber || " ")) +
            "</td><td class=\"lineno\">" +
-             (posLine ? "... " : this.getLinkedLineNo(this.newLineNumber)) +
+             (posLine ? "... " : (this.newLineNumber || " ")) +
            "</td><td class=\"code\">" +
              (!posLine ? "<button class=\"line-action\">+</button>" : "") +
            "<pre>" +

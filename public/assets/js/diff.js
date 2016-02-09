@@ -86,6 +86,19 @@
         buildActionPanel($(this).closest("tr"));
       });
 
+    $(document).on("mouseover", "tr", function () {
+        var $tr = $(this),
+            id = $tr[0].id;
+
+        if (id === "") return;
+        if ($tr.find(".lineno a").length > 0) return;
+
+        $tr.find("td.lineno").each(function () {
+            $(this).html($("<a>", { href: "#" + id }).text($(this).text()));
+          });
+
+      });
+
       if (window.location.hash.length > 1) {
         highlightLine(window.location.hash.substr(1));
       }
