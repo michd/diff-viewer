@@ -86,6 +86,14 @@
         buildActionPanel($(this).closest("tr"));
       });
 
+    // Add links to line numbers when hovering a line
+    // This is done here rather than just included in static HTML because it
+    // potentially reduces the size of the .html file massively (12MB -> 8MB in one example).
+    // At first I was populating all of them on dom ready, which froze the browser.
+    // Credit where it's due: Richard Graham came up with the on-demand idea
+    // to only add in the links when they're required (that is, when your mouse
+    // is over the relevant line.). I `git reset --hard` an hour's worth of work because
+    // of that guy and his unsolicited good ideas.
     $(document).on("mouseover", "tr", function () {
         var $tr = $(this),
             id = $tr[0].id;
