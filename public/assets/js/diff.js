@@ -104,11 +104,9 @@
 
     if (typeof on === "undefined") on = !wasOn;
 
-    if (wasOn === on) return;
 
-    if (!on) {
-      $("#" + DARK_CSS_LINK_ID).remove();
-    } else {
+    $("#" + DARK_CSS_LINK_ID).remove();
+    if (on) {
       $("<link>", {
         "id": DARK_CSS_LINK_ID,
         "rel": "stylesheet",
@@ -182,11 +180,22 @@
 
   // Add a dark mode toggle button in the top right of the page
   (function () {
+    var $button;
+
     if (typeof $.cookie !== "undefined") {
       toggleDarkMode($.cookie("darkMode") === "on");
     }
 
-    // TODO: add the toggle button
+    $button = $("<button>", { "id": "dark-mode-toggle" });
+    $button.text("Light/Dark");
+
+    $button.on("click", function () { toggleDarkMode(); });
+
+    $button.appendTo($("main"));
+
+    if (typeof $.cookie === "undefined") return;
+    toggleDarkMode($.cookie("darkMode") === "on");
+
   }());
 
 }(window.jQuery));

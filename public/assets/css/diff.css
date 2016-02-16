@@ -1,4 +1,5 @@
 main {
+  position: relative;
   max-width: 100%;
   margin: 0 1em 2em 1em;
 }
@@ -142,4 +143,15 @@ tr.action-panel td {
  display: block;
  width: calc(100% - 2em);
  margin: 1em 0;
+}
+
+#dark-mode-toggle {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  background-color: #000;
+  color: #FFF;
+  border: solid 1px #111;
+  font-weight: bold;
+  padding: 1em;
 }

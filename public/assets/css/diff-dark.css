@@ -1,4 +1,70 @@
 body {
-  background: #999;
+  background: #1A1A1A;
+  color: #EEE;
 }
 
+a {
+  color: #0AF;
+}
+
+a:visited {
+  color: #C2F;
+}
+
+tr {
+  background: #111;
+}
+
+.addition {
+  background-color: #002A00;
+}
+
+.removal {
+  background-color: #500;
+}
+
+.position {
+  background-color: #112;
+  color: #AAA;
+}
+
+tr.highlighted {
+  background-color: #055;
+}
+
+.file-wrapper {
+  border-color: #555;
+}
+
+.file-wrapper header {
+  background: #282828;
+}
+
+td.lineno {
+  border-right-color: rgba(255, 255, 255, .1);
+  color: #999;
+}
+
+td.lineno a {
+  color: #999;
+}
+
+tr:hover td {
+  background-color: #330;
+}
+
+tr.action-panel td {
+  background-color: #222;
+}
+
+.action-panel textarea {
+  background: #111;
+  color: #EEE;
+  border-color: #444;
+}
+
+#dark-mode-toggle {
+  background: #FFF;
+  color: #000;
+  border-color: #CCC;
+}
