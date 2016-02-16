@@ -435,6 +435,7 @@ function generateBottomBit() {
     "    monstrous diffs.\n" +
     "  </footer>\n" +
     "  <script src=\"//code.jquery.com/jquery-1.12.0.min.js\"></script>\n" +
+    "  <script src=\"/assets/js/jquery.cookie.js\"></script>\n" +
     "  <script src=\"/assets/js/diff.js\"></script>\n" +
     "</body>\n" +
     "</html>";
