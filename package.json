@@ -1,6 +1,6 @@
 {
   "name": "diff",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A little tool to convert diff files into webpages where can link to specific lines",
   "main": "index.js",
   "scripts": {
@@ -10,7 +10,11 @@
     "git",
     "diff"
   ],
-  "author": "Michael Duerinckx",
+  "author": "Michael Duerinckx <duerinckxmichael@gmail.com>",
+  "repository": {
+      "type": "git",
+      "url": "https://github.com/michd/diff-viewer"
+    },
   "license": "WTFPL",
   "dependencies": {
     "formidable": "^1.0.17",
