@@ -1,4 +1,7 @@
 (function ($) {
+  // Builds a URL pointing at the line back on the github or where-ever
+  // the repository is hosted. Based on file path and line number found
+  // in the tr id attribute
   function buildContextUrl($tr) {
     var $fileLink = $tr.closest(".file-wrapper").find("header a"),
         baseHref = $fileLink.attr("href"),
@@ -14,6 +17,7 @@
     return baseHref;
   }
 
+  // Builds a markdown syntax link to the id of a given line
   function buildMarkdownLink($tr) {
     var id = $tr.attr("id"),
         filename = $tr.closest(".file-wrapper").find("header .filename").text();
@@ -23,6 +27,12 @@
       ")";
   }
 
+  // Builds the action panel and inserts it under the relevant line.
+  // This action panel includes a context link to github or where-ever the repo
+  // is hosted, and provides a textarea with a pre-selected markdown syntax link
+  // to the relevant line.
+  //
+  // TODO: generate the inserted HTML with templates instead of jQuery
   function buildActionPanel($tr) {
     if ($tr.next().is(".action-panel")) return;
 
@@ -60,10 +70,13 @@
 
   }
 
+  // Smoothly scroll to an element on the page
   function scrollTo($el) {
     $("html,body").animate({ "scrollTop": $el.offset().top }, 500);
   }
 
+  // Highlight a line given my an id, changing its background color and
+  // scrolling to it. De-highlights any previously highlighted lines
   function highlightLine(id) {
     $("tr.highlighted").removeClass("highlighted");
 
@@ -81,7 +94,54 @@
     scrollTo($tr);
   }
 
-  $(function () {
+  // Turns the dark style on or off
+  // If no parameter is specified, it will change from the current state.
+  function toggleDarkMode(on) {
+    var DARK_CSS_LINK_ID = "dark-mode-css",
+        DARK_CSS_URL = "/assets/css/diff-dark.css";
+
+    var wasOn = retrieveMode();
+
+    if (typeof on === "undefined") on = !wasOn;
+
+    if (wasOn === on) return;
+
+    if (!on) {
+      $("#" + DARK_CSS_LINK_ID).remove();
+    } else {
+      $("<link>", {
+        "id": DARK_CSS_LINK_ID,
+        "rel": "stylesheet",
+        "type": "text/css",
+        "href": DARK_CSS_URL }).appendTo($("head"));
+    }
+
+    save();
+
+    function retrieveMode() {
+      if (typeof $.cookie === "undefined") {
+        return $("#" + DARK_CSS_LINK_ID).length > 0;
+      }
+
+      return $.cookie("darkMode") === "on";
+    }
+
+    function save() {
+      if (typeof $.cookie === "undefined") return;
+
+      if (on) {
+        $.cookie("darkMode", "on", { "path": "/" });
+      } else {
+        $.removeCookie("darkMode", { "path": "/" });
+      }
+    }
+  }
+
+  window.toggleDarkMode = toggleDarkMode;
+
+  // Stuff to do when the DOM is ready
+  $(document).ready(function () {
+    // When the line-action is clikced, build the action panel
     $(document).on("click", ".line-action", function () {
         buildActionPanel($(this).closest("tr"));
       });
@@ -112,10 +172,21 @@
       }
     });
 
+  // If the hash part of the url changes, (like when clicking a link that only
+  // contains a hash), highlight the relevant line
   window.onhashchange = function () {
       if (window.location.hash.length > 1) {
         highlightLine(window.location.hash.substr(1));
       }
     };
+
+  // Add a dark mode toggle button in the top right of the page
+  (function () {
+    if (typeof $.cookie !== "undefined") {
+      toggleDarkMode($.cookie("darkMode") === "on");
+    }
+
+    // TODO: add the toggle button
+  }());
 
 }(window.jQuery));
