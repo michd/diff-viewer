@@ -1,6 +1,6 @@
 {
   "name": "diff",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A little tool to convert diff files into webpages where can link to specific lines",
   "main": "index.js",
   "scripts": {
