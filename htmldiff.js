@@ -88,7 +88,7 @@ function DiffProcessor(metadata) {
       // 1: "some/file/path.ext"
       // 2: "some/other/file.path"
       PATTERN_FILE_HEADER =
-        new RegExp('^diff\\s+--git\\s+a\\/([\\w\\-\\.\\/]+)\\s+b\\/([\\w\\-\\.\\/]+)$'),
+        new RegExp('^diff\\s+--git\\s+a\\/([\\w\\-\\.\\/@]+)\\s+b\\/([\\w\\-\\.\\/@]+)$'),
 
       // "new file mode 614654"
       // "deleted file mode 456648"
@@ -104,17 +104,17 @@ function DiffProcessor(metadata) {
       // 1: "some/path.png"
       // 2: "some/other/path.png"
       PATTERN_BINARY_FILE_CHANGE =
-        new RegExp('^Binary\\s+files\\s+(?:a\\/)?([\\w\\-\\.\\/]+)\\s+and\\s+(?:b\\/)?([\\w\\-\\.\\/]+)\\s+differ$'),
+        new RegExp('^Binary\\s+files\\s+(?:a\\/)?([\\w\\-\\.\\/@]+)\\s+and\\s+(?:b\\/)?([\\w\\-\\.\\/@]+)\\s+differ$'),
 
       // "--- a/some/file/path.txt"
       // 1: "some/file/path.txt"
       PATTERN_OLD_FILE =
-        new RegExp('^---\\s+(?:a\\/)?([\\w\\-\\.\\/]+)$'),
+        new RegExp('^---\\s+(?:a\\/)?([\\w\\-\\.\\/@]+)$'),
 
       // "+++ b/some/other/file.path"
       // 1: "some/other/file.path"
       PATTERN_NEW_FILE =
-        new RegExp('^\\+\\+\\+\\s+(?:b\\/)?([\\w\\-\\.\\/]+)$'),
+        new RegExp('^\\+\\+\\+\\s+(?:b\\/)?([\\w\\-\\.\\/@]+)$'),
 
       // "@@ -12,86 +15,84 @@"
       // "@@ -12,86 +15,84 @@ line content here"
